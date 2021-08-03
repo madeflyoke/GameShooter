@@ -558,8 +558,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7cfa7b246fbfa40b4141b89eec994c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSwitch: {fileID: 971457629}
-  CurrentWeapon: {fileID: 0}
+  currentWeapon: {fileID: 0}
+  weaponSwitch: {fileID: 0}
 --- !u!4 &520954390
 Transform:
   m_ObjectHideFlags: 0
@@ -972,7 +972,7 @@ GameObject:
   m_Component:
   - component: {fileID: 721042324}
   m_Layer: 6
-  m_Name: BullerSpawner
+  m_Name: BulletSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6176,7 +6176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0cfe71f87bf4f42acc2041e080b2ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
+  playerInfo: {fileID: 0}
 --- !u!1 &982264389
 GameObject:
   m_ObjectHideFlags: 0
@@ -6612,35 +6612,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1004020753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1882705251373570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 126789c712f5b314a8003ef81c70a571, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 21
-  fireRate: 7
-  fireRange: 100
-  force: 155
-  isAutomatic: 0
-  muzzleFlash: {fileID: 7288227446440821527}
-  ImpactEffect: {fileID: 3994002491348741504, guid: 28066206c3b997c408068c15bb96b389, type: 3}
-  shotSfx: {fileID: 8300000, guid: 2203773368e4340d98c114f55c2dd7fd, type: 3}
-  _audioSource: {fileID: 1004020752}
-  ReloadSFX: {fileID: 8300000, guid: a6dde5206e29b51488e11d94d3f8f40e, type: 3}
-  maxAmmo: 60
-  remainAmmo: 60
-  currentAmmo: 20
-  reloadTime: 2
-  numberOfMagazines: 3
-  _cam: {fileID: 1006821926}
-  _animator: {fileID: 1898553370}
 --- !u!20 &1006821926
 Camera:
   m_ObjectHideFlags: 0
@@ -6726,6 +6697,7 @@ GameObject:
   - component: {fileID: 1006821926}
   - component: {fileID: 1013448198}
   - component: {fileID: 1017262144}
+  - component: {fileID: 1008590853}
   m_Layer: 6
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
@@ -6733,6 +6705,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1008590853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008590852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7cfa7b246fbfa40b4141b89eec994c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeapon: {fileID: 0}
+  weaponSwitch: {fileID: 971457629}
 --- !u!1 &1008590854
 GameObject:
   m_ObjectHideFlags: 0
@@ -13198,7 +13184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1774364150}
   m_Layer: 6
-  m_Name: BullerSpawner
+  m_Name: BulletSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18160,6 +18146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 20
   returnSpeed: 25
+  animator: {fileID: 1898553370}
   RecoilRotation: {x: 20, y: 5, z: 10}
 --- !u!95 &1898553370
 Animator:
@@ -18662,9 +18649,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4536839409596622}
   - component: {fileID: 1004020752}
-  - component: {fileID: 1004020753}
   - component: {fileID: 1898553370}
   - component: {fileID: 1898553369}
+  - component: {fileID: 1882705251373571}
   m_Layer: 6
   m_Name: FN57
   m_TagString: Weapon
@@ -18672,6 +18659,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1882705251373571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882705251373570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df8947655a61af24f9613ca878baa2a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: 94ee19ed4ad01a14cae2ee7335590d30, type: 2}
 --- !u!4 &4015563404316802
 Transform:
   m_ObjectHideFlags: 0
@@ -22454,10 +22454,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8916549146466187614}
-  - component: {fileID: 5613363016184302415}
   - component: {fileID: 5613363016184302414}
   - component: {fileID: 5613363016184302417}
   - component: {fileID: 5613363016184302416}
+  - component: {fileID: 5613363016184302415}
   m_Layer: 6
   m_Name: MP7
   m_TagString: Weapon
@@ -22570,26 +22570,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5613363016184302413}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 126789c712f5b314a8003ef81c70a571, type: 3}
+  m_Script: {fileID: 11500000, guid: df8947655a61af24f9613ca878baa2a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 21
-  fireRate: 13
-  fireRange: 100
-  force: 155
-  isAutomatic: 1
-  muzzleFlash: {fileID: 1292121334}
-  ImpactEffect: {fileID: 3994002491348741504, guid: 28066206c3b997c408068c15bb96b389, type: 3}
-  shotSfx: {fileID: 8300000, guid: 6739c01659ad96d47987f4ddee226b36, type: 3}
-  _audioSource: {fileID: 5613363016184302414}
-  ReloadSFX: {fileID: 8300000, guid: ca36d52fb23735a49814092544c49615, type: 3}
-  maxAmmo: 120
-  remainAmmo: 120
-  currentAmmo: 30
-  reloadTime: 2.5
-  numberOfMagazines: 4
-  _cam: {fileID: 1006821926}
-  _animator: {fileID: 5613363016184302417}
+  weaponData: {fileID: 11400000, guid: 1a164f035a79343419b6c1c5b36a509f, type: 2}
 --- !u!114 &5613363016184302416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22604,6 +22588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 20
   returnSpeed: 20
+  animator: {fileID: 5613363016184302417}
   RecoilRotation: {x: -15, y: 5, z: 5}
 --- !u!95 &5613363016184302417
 Animator:

@@ -3,22 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
 public class WeaponSwitch : MonoBehaviour
 {
-
+    //public event Action<GameObject> CurrentWeaponEvent;
     private int selectedWeapon = 0;
-    public event Action<Weapon> SelectedWeaponEvent;
-
-    //[Header("Weapon:")]
-    //public Weapon currentWeapon;
-    [Space]
-    [Header("Animation:")]
-    public Animator _animator;
+    public PlayerInfo playerInfo;
     void Awake()
     {
-
        SelectWeapon();
-        
+       playerInfo.WeaponEvent += CurrentWeapon;
     }
     void Update()
     {
@@ -50,14 +44,22 @@ public class WeaponSwitch : MonoBehaviour
             if (i == selectedWeapon)
             {             
                 item.gameObject.SetActive(true);
-                //currentWeapon = item.gameObject.GetComponentInChildren<Weapon>();
-                SelectedWeaponEvent?.Invoke(item.gameObject.GetComponentInChildren<Weapon>());
+                
+
+                //CurrentWeaponEvent?.Invoke(item.gameObject);
             }
             else
                 item.gameObject.SetActive(false);
             i++;
-        }   
+        }
+      
+    }
+ 
+    private void CurrentWeapon(GameObject weapon)
+    {
 
     }
+    
+    
 
 }

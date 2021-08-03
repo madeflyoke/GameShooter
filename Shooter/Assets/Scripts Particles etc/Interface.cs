@@ -23,8 +23,8 @@ public class Interface : MonoBehaviour
     }
     void Update()
     {
-        CurrentAmmoUI.text = PlayerInfo.CurrentWeapon.currentAmmo.ToString();
-        RemainAmmoUI.text = PlayerInfo.CurrentWeapon.remainAmmo.ToString();
+        //CurrentAmmoUI.text = PlayerInfo.CurrentWeapon.currentAmmo.ToString();
+        //RemainAmmoUI.text = PlayerInfo.CurrentWeapon.remainAmmo.ToString();
 
         //CurrentAmmoUI.text = PlayerInfoUI.CurrentWeapon.currentAmmo.ToString();
         //MaxAmmoUI.text = ("/" + PlayerInfoUI.CurrentWeapon.remainAmmo.ToString());

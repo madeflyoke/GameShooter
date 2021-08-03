@@ -8,29 +8,21 @@ using System;
 
 public class PlayerInfo : MonoBehaviour
 {
+    public event Action<GameObject> WeaponEvent;
 
-    [SerializeField]
-    private WeaponSwitch weaponSwitch;
+    [SerializeField] private GameObject currentWeapon;
+    [SerializeField] WeaponSwitch weaponSwitch;
 
-    public Weapon CurrentWeapon;
-
-    void CurrentWeaponMeth(Weapon selectedweapon)
+    private void GetWeaponInfo(GameObject weapon)
     {
-        CurrentWeapon = selectedweapon;
+        currentWeapon = weapon;
     }
-    private void Awake()
+    private void Start()
     {
-        weaponSwitch.SelectedWeaponEvent += CurrentWeaponMeth;
-
-        //WeaponSwitch = FindObjectOfType<WeaponSwitch>();
-        //CurrentWeapon = WeaponSwitch.currentWeapon;
+       
+        //weaponSwitch.CurrentWeaponEvent += GetWeaponInfo;
     }
-    private void Update()
-    {
-        //CurrentWeapon = WeaponSwitch.currentWeapon;        
-    }
-    
-
+ 
 
 
 
