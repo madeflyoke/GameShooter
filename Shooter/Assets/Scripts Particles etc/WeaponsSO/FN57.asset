@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2dff36ef83aface4c9c7aa710c38df80, type: 3}
-  m_Name: MP7
+  m_Name: FN57
   m_EditorClassIdentifier: 
-  isAutomatic: 1
+  isAutomatic: 0
   damage: 21
-  fireRate: 15
+  fireRate: 7
   fireRange: 100
   force: 155
   muzzleFlash: {fileID: 5182886235443499663, guid: e184700f7ab2e9048b141e3e024d845e, type: 3}
   impactEffect: {fileID: 3994002491348741504, guid: 28066206c3b997c408068c15bb96b389, type: 3}
-  maxAmmo: 30
-  reloadTime: 2.5
-  numberOfMagazines: 4
-  shotSfx: {fileID: 8300000, guid: 6739c01659ad96d47987f4ddee226b36, type: 3}
-  reloadSFX: {fileID: 8300000, guid: ca36d52fb23735a49814092544c49615, type: 3}
+  magazineAmmo: 20
+  reloadTime: 2
+  numberOfMagazines: 3
+  shotSfx: {fileID: 8300000, guid: 2203773368e4340d98c114f55c2dd7fd, type: 3}
+  reloadSFX: {fileID: 8300000, guid: a6dde5206e29b51488e11d94d3f8f40e, type: 3}

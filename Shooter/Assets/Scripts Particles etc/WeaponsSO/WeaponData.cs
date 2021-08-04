@@ -25,7 +25,8 @@ public class WeaponData : ScriptableObject
     [Header("Ammo:")]
     private int remainAmmo = 0;
     private int currentAmmo = 0;
-    [SerializeField] private int maxAmmo = 0;
+    private int maxAmmo = 0;
+    [SerializeField] private int magazineAmmo;
     [SerializeField] private float reloadTime = 2;
     [SerializeField] private int numberOfMagazines = 3;
 
@@ -46,6 +47,7 @@ public class WeaponData : ScriptableObject
     public GameObject ImpactEffect { get => impactEffect; }
     
     public int MaxAmmo { get => maxAmmo; }
+    public int MagazineAmmo { get => magazineAmmo; }
     public int CurrentAmmo { get => currentAmmo; set => currentAmmo = value; }
     public float ReloadTime { get => reloadTime; }
     public int NumberOfMagazines { get => numberOfMagazines; }
@@ -56,9 +58,10 @@ public class WeaponData : ScriptableObject
 
     private void Awake()
     {
+        currentAmmo = magazineAmmo;
+        maxAmmo = magazineAmmo * numberOfMagazines; 
         remainAmmo = maxAmmo;
-        currentAmmo = maxAmmo;
-      
+                
     }
 
 }

@@ -6,13 +6,14 @@ using System;
 
 public class WeaponSwitch : MonoBehaviour
 {
-    //public event Action<GameObject> CurrentWeaponEvent;
+
+
     private int selectedWeapon = 0;
-    public PlayerInfo playerInfo;
-    void Awake()
+    public GameObject CurrentWeapon { get; private set; }
+    void Start()
     {
        SelectWeapon();
-       playerInfo.WeaponEvent += CurrentWeapon;
+
     }
     void Update()
     {
@@ -28,38 +29,29 @@ public class WeaponSwitch : MonoBehaviour
             selectedWeapon = 1;
             SelectWeapon();
         }
-       
-
+        
         //if (Input.GetKey(KeyCode.Alpha3))
         //    selectedWeapon = 2;
     }
     private void SelectWeapon()
-    {
-        
+    {    
         int i = 0;   
 
         foreach (Transform item in transform)
         {
-
             if (i == selectedWeapon)
             {             
                 item.gameObject.SetActive(true);
-                
-
-                //CurrentWeaponEvent?.Invoke(item.gameObject);
+                CurrentWeapon = item.gameObject;           
             }
             else
                 item.gameObject.SetActive(false);
             i++;
         }
-      
-    }
- 
-    private void CurrentWeapon(GameObject weapon)
-    {
+        EventManager.CallOnAmmoChanged(CurrentWeapon.GetComponentInChildren<WeaponController>().weaponDataClone.CurrentAmmo,
+                                       CurrentWeapon.GetComponentInChildren<WeaponController>().weaponDataClone.RemainAmmo);
 
     }
-    
-    
+
 
 }

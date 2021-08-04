@@ -529,51 +529,6 @@ Transform:
   m_Father: {fileID: 1218957113}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &520954388
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 520954390}
-  - component: {fileID: 520954389}
-  m_Layer: 0
-  m_Name: PlayerINFO
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &520954389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 520954388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b7cfa7b246fbfa40b4141b89eec994c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentWeapon: {fileID: 0}
-  weaponSwitch: {fileID: 0}
---- !u!4 &520954390
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 520954388}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.88408166, y: 0.5173018, z: 0.8677086}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &527431805
 GameObject:
   m_ObjectHideFlags: 0
@@ -6176,7 +6131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0cfe71f87bf4f42acc2041e080b2ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInfo: {fileID: 0}
 --- !u!1 &982264389
 GameObject:
   m_ObjectHideFlags: 0
@@ -6528,7 +6482,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.284
+  m_Volume: 0.247
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6697,7 +6651,6 @@ GameObject:
   - component: {fileID: 1006821926}
   - component: {fileID: 1013448198}
   - component: {fileID: 1017262144}
-  - component: {fileID: 1008590853}
   m_Layer: 6
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
@@ -6705,20 +6658,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1008590853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1008590852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b7cfa7b246fbfa40b4141b89eec994c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentWeapon: {fileID: 0}
-  weaponSwitch: {fileID: 971457629}
 --- !u!1 &1008590854
 GameObject:
   m_ObjectHideFlags: 0
@@ -7567,7 +7506,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735b3faf4e5dcd44aaa6a694adb252ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerInfo: {fileID: 520954389}
   CurrentAmmoUI: {fileID: 1001602926}
   RemainAmmoUI: {fileID: 676793822}
 --- !u!1 &1249315527
@@ -13125,7 +13063,7 @@ Transform:
   m_LocalScale: {x: 0.36216, y: 0.36216, z: 0.36216}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1734866955
 Rigidbody:
@@ -18130,7 +18068,7 @@ Transform:
   - {fileID: 740163918}
   - {fileID: 984588307}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1898553369
 MonoBehaviour:
@@ -22477,7 +22415,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.496
+  m_Volume: 0.23
   m_Pitch: 1
   Loop: 0
   Mute: 0

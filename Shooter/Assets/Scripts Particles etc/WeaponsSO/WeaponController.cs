@@ -5,13 +5,13 @@ using System;
 
 public class WeaponController : MonoBehaviour
 {
+
     [SerializeField]
     private WeaponData weaponData;
-    private WeaponData weaponDataClone;
+    public WeaponData weaponDataClone { get; private set; }
+
     private WeaponAnimation weaponAnimation;
-
     private AudioSource audioSource;
-
     private Camera bulletSpawner;
 
     private void Awake()
@@ -32,12 +32,13 @@ public class WeaponController : MonoBehaviour
         weaponAnimation.animator.Play("SwitchingOnAnim");
         weaponDataClone.IsReloading = false;
         weaponAnimation.animator.SetBool("Reloading", false);
+
     }
     void Update()
     {
         if (weaponDataClone.IsReloading)
             return;
-        if ((weaponDataClone.CurrentAmmo <= 0 || weaponDataClone.CurrentAmmo != weaponDataClone.MaxAmmo / weaponDataClone.NumberOfMagazines
+        if ((weaponDataClone.CurrentAmmo <= 0 || weaponDataClone.CurrentAmmo != weaponDataClone.MagazineAmmo
             && Input.GetKey(KeyCode.R)) && weaponDataClone.RemainAmmo> 0)
         {
             StartCoroutine(Reload());
@@ -67,7 +68,7 @@ public class WeaponController : MonoBehaviour
         yield return new WaitForSeconds(weaponDataClone.ReloadTime);
         weaponAnimation.animator.SetBool("Reloading", false);
 
-        int amountNeeded = weaponDataClone.MaxAmmo / weaponDataClone.NumberOfMagazines - weaponDataClone.CurrentAmmo;
+        int amountNeeded = weaponDataClone.MagazineAmmo - weaponDataClone.CurrentAmmo;
         if (amountNeeded < weaponDataClone.RemainAmmo)
         {
             weaponDataClone.CurrentAmmo += amountNeeded;
@@ -79,6 +80,7 @@ public class WeaponController : MonoBehaviour
             weaponDataClone.RemainAmmo = 0;
         }
         weaponDataClone.IsReloading = false;
+        EventManager.CallOnAmmoChanged(weaponDataClone.CurrentAmmo, weaponDataClone.RemainAmmo);
     }
     public void Shoot()
     {
@@ -94,7 +96,7 @@ public class WeaponController : MonoBehaviour
         GameObject tmpHit = Instantiate(weaponDataClone.ImpactEffect, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(tmpHit, 1f);
         weaponDataClone.CurrentAmmo--;
-        Debug.Log(weaponDataClone.CurrentAmmo);
+        EventManager.CallOnAmmoChanged(weaponDataClone.CurrentAmmo, weaponDataClone.RemainAmmo);
         weaponAnimation.RecoilFire();
     }
 
