@@ -43,7 +43,7 @@ public class WeaponData : ScriptableObject
     public float FireRange { get => fireRange; }
     public float Force { get => force; }
 
-    public ParticleSystem MuzzleFlash { get => muzzleFlash; }
+    public ParticleSystem MuzzleFlash { get => muzzleFlash; set => muzzleFlash = value; }
     public GameObject ImpactEffect { get => impactEffect; }
     
     public int MaxAmmo { get => maxAmmo; }

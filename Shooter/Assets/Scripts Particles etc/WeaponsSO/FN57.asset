@@ -16,8 +16,8 @@ MonoBehaviour:
   damage: 21
   fireRate: 7
   fireRange: 100
-  force: 155
-  muzzleFlash: {fileID: 5182886235443499663, guid: e184700f7ab2e9048b141e3e024d845e, type: 3}
+  force: 500
+  muzzleFlash: {fileID: 2722158653971736010, guid: 9efa6775d8bef514ebbe073c71fddf50, type: 3}
   impactEffect: {fileID: 3994002491348741504, guid: 28066206c3b997c408068c15bb96b389, type: 3}
   magazineAmmo: 20
   reloadTime: 2

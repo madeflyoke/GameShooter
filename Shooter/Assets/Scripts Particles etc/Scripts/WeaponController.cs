@@ -29,9 +29,9 @@ public class WeaponController : MonoBehaviour
     }
     private void OnEnable()
     {
-        weaponAnimation.animator.Play("SwitchingOnAnim");
+        weaponAnimation.WeaponAnimator.Play("SwitchingOnAnim");
         weaponDataClone.IsReloading = false;
-        weaponAnimation.animator.SetBool("Reloading", false);
+        weaponAnimation.WeaponAnimator.SetBool("Reloading", false);
 
     }
     void Update()
@@ -64,9 +64,9 @@ public class WeaponController : MonoBehaviour
         weaponDataClone.IsReloading = true;
         audioSource.PlayOneShot(weaponDataClone.ReloadSfx);
         Debug.Log("Reloading...");
-        weaponAnimation.animator.SetBool("Reloading", true);
+        weaponAnimation.WeaponAnimator.SetBool("Reloading", true);
         yield return new WaitForSeconds(weaponDataClone.ReloadTime);
-        weaponAnimation.animator.SetBool("Reloading", false);
+        weaponAnimation.WeaponAnimator.SetBool("Reloading", false);
 
         int amountNeeded = weaponDataClone.MagazineAmmo - weaponDataClone.CurrentAmmo;
         if (amountNeeded < weaponDataClone.RemainAmmo)
@@ -88,11 +88,17 @@ public class WeaponController : MonoBehaviour
         weaponDataClone.MuzzleFlash.Play();
         RaycastHit hit;
         if (Physics.Raycast(bulletSpawner.transform.position, bulletSpawner.transform.forward, out hit, weaponDataClone.FireRange))
-        {
-            Debug.Log("HIT " + hit.collider);
+        {         
+            if (hit.rigidbody != null)
+            {
+                hit.rigidbody.AddForce(-hit.normal * weaponDataClone.Force);
+                if (hit.rigidbody.gameObject.CompareTag("Enemy"))
+                {
+                    Debug.Log("Enemy" + hit.collider);
+                    EventManager.CallOnShotAndHit(weaponDataClone.Damage);
+                }
+            }
         }
-        if (hit.rigidbody != null)
-            hit.rigidbody.AddForce(-hit.normal * weaponDataClone.Force);
         GameObject tmpHit = Instantiate(weaponDataClone.ImpactEffect, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(tmpHit, 1f);
         weaponDataClone.CurrentAmmo--;
