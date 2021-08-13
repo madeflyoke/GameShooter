@@ -17,6 +17,10 @@ public class Interface : MonoBehaviour
         EventManager.AmmoChangedEvent += GetWeaponInfoUI;
     }
 
+    private void OnDisable()
+    {
+        EventManager.AmmoChangedEvent -= GetWeaponInfoUI;
+    }
     private void GetWeaponInfoUI(int currentAmmo, int remainAmmo)
     {
 

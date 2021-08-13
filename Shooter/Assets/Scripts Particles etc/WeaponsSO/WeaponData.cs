@@ -11,7 +11,7 @@ public class WeaponData : ScriptableObject
 
     [Header("FireSettings:")]
     private float nextTimeToFire = 0f;
-    [SerializeField] private float damage = 0;
+    [SerializeField] private int damage = 0;
     [SerializeField] private float fireRate = 1;
     [SerializeField] private float fireRange = 100;
     [SerializeField] private float force = 155;
@@ -38,7 +38,7 @@ public class WeaponData : ScriptableObject
     public bool IsReloading { get => isReloading; set => isReloading =value; }
 
     public float NextTimeToFire { get => nextTimeToFire; set => nextTimeToFire = value; }
-    public float Damage { get => damage; }
+    public int Damage { get => damage; }
     public float FireRate { get => fireRate; }
     public float FireRange { get => fireRange; }
     public float Force { get => force; }

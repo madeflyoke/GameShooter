@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Linq;
 
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private float ViewRadius = 10f;
     [SerializeField] private float TurnSpeed = 5f;
+    [SerializeField] private int EnemyHealth = 100;
     [SerializeField] private Transform player;
     private NavMeshAgent agent;
     private Animator animator;
@@ -14,6 +16,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnDisable()
     {
+        EventManager.ShotAndHitEvent -= GotShot;
         animator.enabled = false;
         Destroy(gameObject, 5f);
         EventManager.CallOnEnemyDie();
@@ -64,16 +67,23 @@ public class EnemyController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, ViewRadius);
     }
 
-    private void GotShot(float damage)
-    {    
-        foreach (var item in childsRigidbodies)
+    private void GotShot(int damage, Rigidbody target) 
+    {
+        Debug.Log(damage + target.gameObject.name);
+        if (childsRigidbodies.Contains(target))
         {
-            item.isKinematic = false;
-        }
-        enabled = false;
-    
+            EnemyHealth -= damage;
+            Debug.Log("REMAIN " + EnemyHealth);
+            if (EnemyHealth<=0)
+            {
+                foreach (var item in childsRigidbodies)
+                {
+                    item.isKinematic = false;
+                }
+                enabled = false;
+            }
+            
+        }        
     }
-
-
 
 }

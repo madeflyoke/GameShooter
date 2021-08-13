@@ -16,16 +16,11 @@ public class WeaponController : MonoBehaviour
 
     private void Awake()
     {
-        weaponDataClone  =  Instantiate(weaponData);
-
+        weaponDataClone = Instantiate(weaponData);
         weaponAnimation = GetComponent<WeaponAnimation>();
         audioSource = GetComponent<AudioSource>();
         bulletSpawner = GetComponentInParent<Camera>();
-        
-    }
-    void Start()
-    {
-        
+
     }
     private void OnEnable()
     {
@@ -39,12 +34,12 @@ public class WeaponController : MonoBehaviour
         if (weaponDataClone.IsReloading)
             return;
         if ((weaponDataClone.CurrentAmmo <= 0 || weaponDataClone.CurrentAmmo != weaponDataClone.MagazineAmmo
-            && Input.GetKey(KeyCode.R)) && weaponDataClone.RemainAmmo> 0)
+            && Input.GetKey(KeyCode.R)) && weaponDataClone.RemainAmmo > 0)
         {
             StartCoroutine(Reload());
             return;
         }
-                 
+
         if (weaponDataClone.IsAutomatic)
         {
             if (Input.GetKey(KeyCode.Mouse0) && Time.time >= weaponDataClone.NextTimeToFire && weaponDataClone.CurrentAmmo > 0)
@@ -63,7 +58,6 @@ public class WeaponController : MonoBehaviour
     {
         weaponDataClone.IsReloading = true;
         audioSource.PlayOneShot(weaponDataClone.ReloadSfx);
-        Debug.Log("Reloading...");
         weaponAnimation.WeaponAnimator.SetBool("Reloading", true);
         yield return new WaitForSeconds(weaponDataClone.ReloadTime);
         weaponAnimation.WeaponAnimator.SetBool("Reloading", false);
@@ -88,14 +82,14 @@ public class WeaponController : MonoBehaviour
         weaponDataClone.MuzzleFlash.Play();
         RaycastHit hit;
         if (Physics.Raycast(bulletSpawner.transform.position, bulletSpawner.transform.forward, out hit, weaponDataClone.FireRange))
-        {         
+        {
             if (hit.rigidbody != null)
             {
                 hit.rigidbody.AddForce(-hit.normal * weaponDataClone.Force);
                 if (hit.rigidbody.gameObject.CompareTag("Enemy"))
                 {
-                    Debug.Log("Enemy" + hit.collider);
-                    EventManager.CallOnShotAndHit(weaponDataClone.Damage);
+                    Debug.Log("Enemy" + hit.collider.gameObject.name);
+                    EventManager.CallOnShotAndHit(weaponDataClone.Damage, hit.collider.attachedRigidbody);
                 }
             }
         }
