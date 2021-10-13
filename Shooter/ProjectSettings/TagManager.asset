@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Weapon
   - Enemy
+  - EnemyHitPoint
   layers:
   - Default
   - TransparentFX
@@ -14,8 +15,8 @@ TagManager:
   - Water
   - UI
   - Post Processing
-  - 
-  - 
+  - Enemy
+  - Room
   - 
   - 
   - 
