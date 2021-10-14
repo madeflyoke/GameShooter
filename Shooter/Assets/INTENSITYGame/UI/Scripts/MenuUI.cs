@@ -6,16 +6,18 @@ public class MenuUI : MonoBehaviour
 {
     [SerializeField] private Button playButton;
     [SerializeField] private Button exitButton;
+    [SerializeField] private GameObject wavesScreen;
 
     private void OnEnable()
     {
+        wavesScreen.SetActive(false);
         playButton.onClick.AddListener(StartGame);
         exitButton.onClick.AddListener(EndGame);
     }
 
     private void StartGame()
     {
-        SceneManager.LoadSceneAsync(1);
+        wavesScreen.SetActive(true);
     }
 
     private void EndGame()

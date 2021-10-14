@@ -6,14 +6,20 @@ using System;
 
 public class WeaponSwitch : MonoBehaviour
 {
-
-
+    [SerializeField] private List<GameObject> weapons;
     private int selectedWeapon = 0;
-    public GameObject CurrentWeapon { get; private set; }
-    void Start()
+    public WeaponController CurrentWeapon { get; private set; }
+    public List<WeaponController> weaponsControllers;
+    private void Awake()
     {
-       SelectWeapon();
-
+        foreach (GameObject item in weapons)
+        {
+            weaponsControllers.Add(item.GetComponent<WeaponController>());
+        }
+    }
+    void Start()
+    {     
+        SelectWeapon();
     }
     void Update()
     {
@@ -35,22 +41,19 @@ public class WeaponSwitch : MonoBehaviour
     }
     private void SelectWeapon()
     {    
-        int i = 0;   
-
-        foreach (Transform item in transform)
+        for (int i = 0; i < weapons.Count; i++)
         {
-            if (i == selectedWeapon)
-            {             
-                item.gameObject.SetActive(true);
-                CurrentWeapon = item.gameObject;           
+            if (i==selectedWeapon)
+            {
+                weapons[i].SetActive(true);
+                CurrentWeapon = weaponsControllers[i];
             }
             else
-                item.gameObject.SetActive(false);
-            i++;
+            {
+                weapons[i].SetActive(false);
+            }
         }
-        EventManager.CallOnAmmoChanged(CurrentWeapon.GetComponentInChildren<WeaponController>().weaponDataClone.CurrentAmmo,
-                                       CurrentWeapon.GetComponentInChildren<WeaponController>().weaponDataClone.RemainAmmo);
-
+        EventManager.CallOnAmmoChanged(CurrentWeapon.weaponDataClone.CurrentAmmo, CurrentWeapon.weaponDataClone.RemainAmmo);
     }
 
 

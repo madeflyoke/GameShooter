@@ -6,16 +6,20 @@ using UnityEngine.AI;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject spawnEffect;
-    [SerializeField] private GameObject enemyPrefab;   
-    [SerializeField] private List<uint> WavesEnemiesNumber;
+    [SerializeField] private GameObject enemyPrefab;
+    private List<int> WavesEnemiesNumber = new List<int>(SpawnMenuUI.enemiesWavesRef);      
     private int CurrentWaveIndex=0;
     private List<Vector3> spawnPoints = new List<Vector3>();
     private void Start()
     {
-        EventManager.EnemyDieEvent += EnemyDied;
-        if (WavesEnemiesNumber.Count!=0)
-           StartCoroutine(SpawnEnemyWave(WavesEnemiesNumber[CurrentWaveIndex]));       
+        if (WavesEnemiesNumber.Count != 0)
+            StartCoroutine(SpawnEnemyWave(WavesEnemiesNumber[CurrentWaveIndex]));
     }
+    private void OnEnable()
+    {
+        EventManager.EnemyDieEvent += EnemyDied;
+    }
+
     private void OnDisable()
     {
         EventManager.EnemyDieEvent -= EnemyDied;
@@ -37,11 +41,20 @@ public class EnemySpawner : MonoBehaviour
             CurrentWaveIndex++;
             StartCoroutine(SpawnEnemyWave(WavesEnemiesNumber[CurrentWaveIndex]));
         }
+        if (WavesEnemiesNumber[CurrentWaveIndex] == 0 && WavesEnemiesNumber.Count <= (CurrentWaveIndex + 1))
+        {
+           StartCoroutine(EndGameDelay());
+        }
+        
     }
-
-    IEnumerator SpawnEnemyWave(uint EnemiesNumber)
+    IEnumerator EndGameDelay()
     {
-        uint enemiesNumber = EnemiesNumber;
+        yield return new WaitForSeconds(3f);
+        EventManager.CallOnEndGameEvent();
+    }
+    IEnumerator SpawnEnemyWave(int EnemiesNumber)
+    {
+        int enemiesNumber = EnemiesNumber;
         while (enemiesNumber > 0)
         {
             Vector3 spawnPoint = RandomSpawnPoint();

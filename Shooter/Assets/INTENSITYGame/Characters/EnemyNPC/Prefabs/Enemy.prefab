@@ -1500,7 +1500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ViewRadius: 10
   TurnSpeed: 5
-  MaxEnemyHealth: 400
+  MaxEnemyHealth: 200
   EnemyDamage: 10
   enemyAttackPoint: {fileID: 1224776520337306376}
   closeAttackRange: 0.1
@@ -1632,7 +1632,7 @@ GameObject:
   - component: {fileID: 7198727352560665087}
   m_Layer: 7
   m_Name: Head
-  m_TagString: Enemy
+  m_TagString: EnemyHead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

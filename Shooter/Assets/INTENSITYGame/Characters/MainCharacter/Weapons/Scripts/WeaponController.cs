@@ -5,7 +5,6 @@ using System;
 
 public class WeaponController : MonoBehaviour
 {
-
     [SerializeField]
     private WeaponData weaponData;
     public WeaponData weaponDataClone { get; private set; }
@@ -85,11 +84,14 @@ public class WeaponController : MonoBehaviour
             if (hit.rigidbody != null)
             {
                 EventManager.CallOnShoot(hit);
-                Debug.Log(hit.collider, hit.collider.gameObject);
                 hit.rigidbody.AddForce(-hit.normal * weaponDataClone.Force);
                 if (hit.rigidbody.gameObject.CompareTag("Enemy"))
                 {
                     EventManager.CallOnShotEnemy(weaponDataClone.Damage, hit);
+                }
+                if (hit.rigidbody.gameObject.CompareTag("EnemyHead"))
+                {
+                    EventManager.CallOnShotEnemy(weaponDataClone.Damage*3, hit);
                 }
             }
         }

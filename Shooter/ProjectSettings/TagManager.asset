@@ -7,6 +7,8 @@ TagManager:
   - Weapon
   - Enemy
   - EnemyHitPoint
+  - EnemyHead
+  - Lamp
   layers:
   - Default
   - TransparentFX

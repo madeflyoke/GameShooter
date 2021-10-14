@@ -9,7 +9,7 @@ public static class EventManager
     public static event Action EnemyDieEvent;
     public static event Action <RaycastHit>ShootAnimationEvent;
     public static event Action <int,int> PlayerHitEvent;
-    public static event Action EndGameEvent;
+    public static event Action EndGameEvent;    
 
     public static void CallOnEndGameEvent()
     {

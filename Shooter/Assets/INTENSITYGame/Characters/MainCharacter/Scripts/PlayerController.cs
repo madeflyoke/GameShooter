@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private RepositoryBase repositoryBase;
-    [SerializeField] private AudioClip playerGetDmg;
+    [SerializeField] private AudioClip playerGetDmgSFX;
     [SerializeField] private int maxHealth;
+    
     private AudioSource audioSource;
     private int enemyDamage = 0;
     private int currentHealth;
@@ -30,13 +31,13 @@ public class PlayerController : MonoBehaviour
             }
             currentHealth -= enemyDamage;
             EventManager.CallOnPlayerHit(enemyDamage, currentHealth);
-            audioSource.PlayOneShot(playerGetDmg);
+            audioSource.PlayOneShot(playerGetDmgSFX);
             if (currentHealth<=0)
             {
                 EventManager.CallOnEndGameEvent();
             }
         }
-
+        
     }
 
 }
