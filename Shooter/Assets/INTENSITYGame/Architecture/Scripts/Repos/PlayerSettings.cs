@@ -10,7 +10,7 @@ public class PlayerSettings
     public float weaponVolume=0.7f;
     public float SFXVolume=0.5f;
     public bool autoAim;
-    public int FPSLimit=60;
+    public int FPSLimit=240;
 
     public void Initialize()
     {

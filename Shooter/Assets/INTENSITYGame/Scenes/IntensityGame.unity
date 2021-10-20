@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: cafc3314a5ab2e0409a74c092e68805b, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 671304895c531274c94a6602d0b21d5b, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2831,7 +2831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnEffect: {fileID: 3182714471774644942, guid: d8fc1fb3d1df2c24b8f5a75e6fd5fd71, type: 3}
-  enemyPrefab: {fileID: 3440871794629019736, guid: 077d1b438f0ce8e488236565cbc63f90, type: 3}
+  enemyPrefab: {fileID: 6269899381492143860, guid: c088a666d666e9a4ebaab272ac811eb1, type: 3}
 --- !u!4 &579412182
 Transform:
   m_ObjectHideFlags: 0
@@ -11389,7 +11389,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -278, y: -270}
+  m_AnchoredPosition: {x: -191, y: -542}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2047369927

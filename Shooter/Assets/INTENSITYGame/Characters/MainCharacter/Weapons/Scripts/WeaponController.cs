@@ -70,7 +70,6 @@ public class WeaponController : MonoBehaviour
                 weaponDataClone.NextTimeToFire = Time.time + 1f / weaponDataClone.FireRate;
                 if (repositoryBase.PlayerSettingsObj.autoAim)
                 {
-                    Debug.Log("aim");
                     EnemyAutoAim();
                 }          
                 Shoot();
