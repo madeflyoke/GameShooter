@@ -14,11 +14,12 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        repositoryBase.PlayerInfoObj.MaxHealth = maxHealth;
+        audioSource.volume = repositoryBase.PlayerSettingsObj.SFXVolume;
+        repositoryBase.PlayerInfoObj.maxHealth = maxHealth;
     }
     private void Start()
     {
-        currentHealth = repositoryBase.PlayerInfoObj.MaxHealth;
+        currentHealth = repositoryBase.PlayerInfoObj.maxHealth;
     }
 
     private void OnTriggerEnter(Collider other)

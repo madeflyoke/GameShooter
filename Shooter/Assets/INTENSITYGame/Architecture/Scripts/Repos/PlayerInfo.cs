@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+using System;
+[Serializable]
 public class PlayerInfo 
 {
-    private int maxHealth = 100;
-    public int MaxHealth { get => maxHealth; set => maxHealth = value; }
-
+    public int maxHealth = 100;
 }

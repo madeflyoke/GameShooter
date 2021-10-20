@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public static class EventManager 
 {
+    public static event Action<object, bool> InputEvent;
     public static event Action<int, int> AmmoChangedEvent;
     public static event Action<int, RaycastHit> ShotEnemyEvent;
     public static event Action EnemyDieEvent;
@@ -11,6 +12,10 @@ public static class EventManager
     public static event Action <int,int> PlayerHitEvent;
     public static event Action EndGameEvent;    
 
+    public static void CallOnInput(object inputclass, bool isPressed)
+    {
+        InputEvent?.Invoke(inputclass,isPressed);
+    }
     public static void CallOnEndGameEvent()
     {
         EndGameEvent?.Invoke();

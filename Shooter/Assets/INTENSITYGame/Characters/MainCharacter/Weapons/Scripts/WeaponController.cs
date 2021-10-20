@@ -5,52 +5,78 @@ using System;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField]
-    private WeaponData weaponData;
+    [SerializeField] private WeaponData weaponData;
     public WeaponData weaponDataClone { get; private set; }
 
+    private RepositoryBase repositoryBase;
     private WeaponAnimation weaponAnimation;
     private AudioSource audioSource;
     private Camera bulletSpawner;
-
+    private bool CanShoot, CanReload;
     private void Awake()
     {
+        repositoryBase = FindObjectOfType<RepositoryBase>();
         weaponDataClone = Instantiate(weaponData);
         weaponAnimation = GetComponent<WeaponAnimation>();
         audioSource = GetComponent<AudioSource>();
+        audioSource.volume = repositoryBase.PlayerSettingsObj.weaponVolume;
         bulletSpawner = GetComponentInParent<Camera>();
-
     }
     private void OnEnable()
     {
         weaponAnimation.WeaponAnimator.Play("SwitchingOnAnim");
         weaponDataClone.IsReloading = false;
         weaponAnimation.WeaponAnimator.SetBool("Reloading", false);
-
+        EventManager.InputEvent += InputHandler;
     }
+    private void OnDisable()
+    {
+        EventManager.InputEvent -= InputHandler;
+    }
+    private void InputHandler(object obj, bool isPressed)
+    {
+        if (obj is FireButtonController)
+        {
+            CanShoot = isPressed;
+        }
+        else if (obj is ReloadButtonController)
+        {
+            CanReload = isPressed;
+        }
+    }
+
     void Update()
     {
         if (weaponDataClone.IsReloading)
             return;
-        if ((weaponDataClone.CurrentAmmo <= 0 || weaponDataClone.CurrentAmmo != weaponDataClone.MagazineAmmo
-            && Input.GetKey(KeyCode.R)) && weaponDataClone.RemainAmmo > 0)
+
+        if (weaponDataClone.CurrentAmmo <= 0 && weaponDataClone.RemainAmmo > 0)
         {
             StartCoroutine(Reload());
             return;
         }
-
-        if (weaponDataClone.IsAutomatic)
+        if (CanReload)
         {
-            if (Input.GetKey(KeyCode.Mouse0) && Time.time >= weaponDataClone.NextTimeToFire && weaponDataClone.CurrentAmmo > 0)
+            if (weaponDataClone.CurrentAmmo != weaponDataClone.MagazineAmmo && weaponDataClone.RemainAmmo > 0)                                                                              
             {
-                weaponDataClone.NextTimeToFire = Time.time + 1f / weaponDataClone.FireRate;
-                Shoot();
+                StartCoroutine(Reload());
+                return;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Mouse0) && Time.time >= weaponDataClone.NextTimeToFire && weaponDataClone.CurrentAmmo > 0)
+        if (CanShoot)
         {
-            weaponDataClone.NextTimeToFire = Time.time + 1f / weaponDataClone.FireRate;
-            Shoot();
+            if (Time.time >= weaponDataClone.NextTimeToFire && weaponDataClone.CurrentAmmo > 0)
+            {
+                weaponDataClone.NextTimeToFire = Time.time + 1f / weaponDataClone.FireRate;
+                if (repositoryBase.PlayerSettingsObj.autoAim)
+                {
+                    Debug.Log("aim");
+                    EnemyAutoAim();
+                }          
+                Shoot();
+                if (!weaponDataClone.IsAutomatic)
+                    CanShoot = false;
+            }
         }
     }
     IEnumerator Reload()
@@ -74,12 +100,26 @@ public class WeaponController : MonoBehaviour
         }
         weaponDataClone.IsReloading = false;
         EventManager.CallOnAmmoChanged(weaponDataClone.CurrentAmmo, weaponDataClone.RemainAmmo);
+        CanReload = false;
+    }
+
+    private void EnemyAutoAim()
+    {
+        if (Physics.SphereCast(bulletSpawner.transform.position, 2f, bulletSpawner.transform.forward, out RaycastHit sphereHit))
+        {
+            if (sphereHit.collider.gameObject.CompareTag("Enemy") || sphereHit.collider.gameObject.CompareTag("EnemyHead"))
+            {
+                if (sphereHit.collider.attachedRigidbody.isKinematic)
+                {
+                    bulletSpawner.transform.LookAt(sphereHit.collider.gameObject.transform.position);
+                }             
+            }
+        }
     }
     public void Shoot()
-    {      
+    {
         audioSource.PlayOneShot(weaponDataClone.ShotSfx);
-        RaycastHit hit;
-        if (Physics.Raycast(bulletSpawner.transform.position, bulletSpawner.transform.forward, out hit, weaponDataClone.FireRange))
+        if (Physics.Raycast(bulletSpawner.transform.position, bulletSpawner.transform.forward, out RaycastHit hit, weaponDataClone.FireRange))
         {
             if (hit.rigidbody != null)
             {
@@ -87,11 +127,12 @@ public class WeaponController : MonoBehaviour
                 hit.rigidbody.AddForce(-hit.normal * weaponDataClone.Force);
                 if (hit.rigidbody.gameObject.CompareTag("Enemy"))
                 {
+                    Debug.Log("hit enemy");
                     EventManager.CallOnShotEnemy(weaponDataClone.Damage, hit);
                 }
                 if (hit.rigidbody.gameObject.CompareTag("EnemyHead"))
                 {
-                    EventManager.CallOnShotEnemy(weaponDataClone.Damage*3, hit);
+                    EventManager.CallOnShotEnemy(weaponDataClone.Damage * 3, hit);
                 }
             }
         }

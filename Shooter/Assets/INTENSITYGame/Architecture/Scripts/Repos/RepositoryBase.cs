@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class RepositoryBase : MonoBehaviour
 {
-    private PlayerInfo playerInfoObj = new PlayerInfo();
-    public PlayerInfo PlayerInfoObj => playerInfoObj;
+    private PlayerInfo playerInfo = new PlayerInfo();
+    public PlayerInfo PlayerInfoObj => playerInfo;
+
+    private PlayerSettings playerSettings = new PlayerSettings();
+    public PlayerSettings PlayerSettingsObj => playerSettings;
+    private void Awake()
+    {
+        PlayerSettingsObj.Initialize();
+        Application.targetFrameRate = PlayerSettingsObj.FPSLimit;
+    }
+
 }

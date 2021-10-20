@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AmmoLamp : MonoBehaviour
 {
+    [SerializeField] private RepositoryBase repositoryBase;
     [SerializeField] private WeaponSwitch weapons;
     [SerializeField] private AudioClip ammoCollectSFX;
     [SerializeField] private Material glass;
@@ -13,6 +14,7 @@ public class AmmoLamp : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        audioSource.volume = repositoryBase.PlayerSettingsObj.SFXVolume;
     }
     private void OnDisable()
     {
