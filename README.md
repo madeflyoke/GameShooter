@@ -10,7 +10,7 @@
 
 ## Features
 * First-person shooter game
-* Interesting "disorientatioanl" concept
+* Interesting "disorientational" concept
 * Few weapons to choose
 * Customizable level's enemies (waves count, enemies count)
 * Ragdoll enemies with AI system by NavMesh and some individual states (chase, attack etc.)
