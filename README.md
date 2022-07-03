@@ -1,6 +1,6 @@
 # Shooter
 
-> :warning: ** PC version currently ends updates, for latest improvements check mobile version [here](https://github.com/madeflyoke/GameShooter/tree/mobiledev)**
+> :warning: **PC version currently ends updates, for latest improvements check mobile version [here](https://github.com/madeflyoke/GameShooter/tree/mobiledev)**
 
 ## Details
 * Genre(s): Action, Arcade
