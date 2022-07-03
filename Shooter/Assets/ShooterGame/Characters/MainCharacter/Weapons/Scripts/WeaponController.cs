@@ -84,6 +84,7 @@ public class WeaponController : MonoBehaviour
         audioSource.PlayOneShot(weaponDataClone.ReloadSfx);
         weaponAnimation.WeaponAnimator.SetBool("Reloading", true);
         yield return new WaitForSeconds(weaponDataClone.ReloadTime);
+        weaponAnimation.WeaponAnimator.ResetTrigger("Shoot");
         weaponAnimation.WeaponAnimator.SetBool("Reloading", false);
 
         int amountNeeded = weaponDataClone.MagazineAmmo - weaponDataClone.CurrentAmmo;

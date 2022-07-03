@@ -17,6 +17,7 @@ public class WeaponAnimation : MonoBehaviour
    
     private Vector3 currentRot;
     private Vector3 Rot;
+
     private void OnEnable()
     {
       EventManager.ShootAnimationEvent += ShootEffect;
@@ -29,18 +30,18 @@ public class WeaponAnimation : MonoBehaviour
     {
         weaponController = GetComponent<WeaponController>();
         weaponController.weaponDataClone.MuzzleFlash = Instantiate(weaponController.weaponDataClone.MuzzleFlash, bulletSpawner.transform);
-      
     }
     void FixedUpdate()
     {
         currentRot = Vector3.Lerp(currentRot, new Vector3(0, 0, 0), returnSpeed * Time.deltaTime);
         Rot = Vector3.Lerp(Rot, currentRot, rotationSpeed * Time.deltaTime);
         transform.localRotation = Quaternion.Euler(Rot);
-
     }
     public void RecoilFire()
     {
-        currentRot += new Vector3(RecoilRotation.x, Random.Range(-RecoilRotation.y, RecoilRotation.y), Random.Range(-RecoilRotation.z,RecoilRotation.z));       
+        animator.ResetTrigger("Shoot");
+        animator.SetTrigger("Shoot");
+        currentRot += new Vector3(RecoilRotation.x, Random.Range(-RecoilRotation.y, RecoilRotation.y), Random.Range(-RecoilRotation.z,RecoilRotation.z));
     }
 
     private void ShootEffect(RaycastHit hit)
