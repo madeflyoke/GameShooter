@@ -3,6 +3,7 @@
 > **PC version [here](https://github.com/madeflyoke/GameShooter)**
 
 ## Details
+* Title: "Intensity"
 * Genre(s): Action, Arcade
 * Platform(s): PC
 * Engine: Unity
