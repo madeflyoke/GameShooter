@@ -3,6 +3,7 @@
 > :warning: **PC version currently ends updates, for latest improvements check mobile version [here](https://github.com/madeflyoke/GameShooter/tree/mobiledev)**
 
 ## Details
+* Title: "Intensity"
 * Genre(s): Action, Arcade
 * Platform(s): PC
 * Engine: Unity
